@@ -1,0 +1,54 @@
+<script setup>
+import DetailSection from '@/components/detail-section/detail -section.vue';
+import useDetailStore from '@/stores/modules/details';
+import { storeToRefs } from 'pinia';
+
+
+const {orderRules} = storeToRefs(useDetailStore()) 
+
+</script>
+
+
+<template>
+  <div class="notice">
+
+    <detail-section header="预定须知">
+
+      <template #main>
+        <div class="notice-inner">
+          <template v-for="(item, index) in orderRules" :key="index">
+            <div class="item">
+              <span class="title">{{ item.title }}</span>
+              <span class="intro">{{ item.introduction }}</span>
+              <span class="tip" v-if="item.tips">查看说明</span>
+            </div>
+          </template>
+        </div>
+      </template>
+
+
+    </detail-section>
+    
+  </div>
+</template>
+
+
+<style lang="less" scoped>
+.notice-inner {
+  .item {
+    display: flex;
+    margin: 10px 0 20px;
+    font-size: 12px;
+
+    .title {
+      width: 64px;
+      color: #666;
+    }
+
+    .intro {
+      flex: 1;
+      color: #333;
+    }
+  }
+}
+</style>
